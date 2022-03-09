@@ -19,6 +19,8 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
+    if message.author == bot.user:
+        return
     ctx = await bot.get_context(message)
     await ctx.send("Hi!")
 
