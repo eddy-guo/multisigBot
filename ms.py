@@ -17,4 +17,9 @@ async def on_ready():
     guild = discord.utils.get(bot.guilds, name=GUILD)
     print(f"{bot.user} is now connected to {guild.name}.")
 
+@bot.event
+async def on_message(message):
+    ctx = await bot.get_context(message)
+    await ctx.send("Hi!")
+
 bot.run(TOKEN)
