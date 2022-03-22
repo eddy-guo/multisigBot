@@ -27,6 +27,5 @@ async def on_message(message):
     if message.channel.id == 955726679207198741:
         if message.content == "!announce":
             await announce.announcement(ctx, message.content)
-        await ctx.send("Hi!")
 
 bot.run(TOKEN)
