@@ -1,4 +1,5 @@
 import os, discord, pdb
+import announce
 from dotenv import load_dotenv
 from discord.ext import commands
 
@@ -24,14 +25,8 @@ async def on_message(message):
         return
     ctx = await bot.get_context(message)
     if message.channel.id == 955726679207198741:
-        ctx = await bot.get_context(message)
+        if message.content == "!announce":
+            await announce.announcement(ctx, message.content)
         await ctx.send("Hi!")
-    
-    await bot.process_commands(message)
-
-@bot.command(pass_context=True)
-@commands.has_role('testmod')
-async def modcheck(ctx):
-    await ctx.send("Hello moderator")
 
 bot.run(TOKEN)
