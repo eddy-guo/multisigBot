@@ -7,7 +7,6 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 
 bot = commands.Bot(command_prefix='!')
 
-@bot.command(pass_context=True)
-@commands.has_role('testmod')
+@bot.command()
 async def announcement(ctx, message):
     await ctx.send(f"You just sent {message}!")
