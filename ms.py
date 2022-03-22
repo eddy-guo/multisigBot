@@ -22,9 +22,11 @@ async def on_ready():
 async def on_message(message):
     if message.author == bot.user:
         return
+    ctx = await bot.get_context(message)
     if message.channel.id == 955726679207198741:
         ctx = await bot.get_context(message)
         await ctx.send("Hi!")
+    
     await bot.process_commands(message)
 
 @bot.command(pass_context=True)
