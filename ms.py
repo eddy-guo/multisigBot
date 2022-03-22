@@ -23,5 +23,11 @@ async def on_message(message):
         return
     ctx = await bot.get_context(message)
     await ctx.send("Hi!")
+    await bot.process_commands(message)
+
+@bot.command(pass_context = True)
+@commands.has_role('testmod')
+async def modcheck(ctx):
+    await ctx.send("Hello moderator")
 
 bot.run(TOKEN)
