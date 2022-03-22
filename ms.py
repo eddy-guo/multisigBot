@@ -38,7 +38,8 @@ async def on_message(message):
     for user in user_messages:
         if user_messages[user] == "!announce" and user == message.author.name:
             await announce.announcement(ctx, message.content)
-    user_messages[message.author.name] = message.content
+    if role in message.author.roles:
+        user_messages[message.author.name] = message.content
     print(user_messages)
 
 bot.run(TOKEN)
