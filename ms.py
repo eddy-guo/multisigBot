@@ -11,7 +11,6 @@ GUILD = os.getenv('DISCORD_GUILD')
 intents = discord.Intents.default()
 intents.members = True
 bot = commands.Bot(command_prefix='!', intents=intents)
-client = discord.Client()
 
 @bot.event
 async def on_ready():
@@ -28,9 +27,13 @@ async def on_message(message):
     if message.author == bot.user:
         return
     ctx = await bot.get_context(message)
+    role = discord.utils.get(ctx.guild.roles, name="testmod")
     if message.channel.id == 955726679207198741:
         if message.content == "!announce":
-            await ctx.send(f"What would you like to announce, <@" + str(message.author.id) + '>?')
+            if role in message.author.roles:
+                await ctx.send(f"What would you like to announce, <@" + str(message.author.id) + '>?')
+            else:
+                await ctx.send("**Sorry, you do not have permission to do that.**")
     
     for user in user_messages:
         if user_messages[user] == "!announce" and user == message.author.name:
