@@ -1,4 +1,4 @@
-import os, discord, pdb
+import os, discord, pdb, asyncio
 from dotenv import load_dotenv
 from discord.ext import commands
 
@@ -12,4 +12,7 @@ async def announcement(ctx, message):
     if message == "!announce":
         await ctx.send(f"You can only announce one message at a time. Please try again.")
     else:
-        await ctx.send(f"You just sent {message}!")
+        response = await ctx.send(f"You just sent {message}!")
+        moai = '\U0001F5FF'
+        await response.add_reaction(moai)
+        await response.add_reaction('\U0001F911')
