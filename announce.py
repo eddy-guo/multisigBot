@@ -14,5 +14,8 @@ async def announcement(ctx, message):
     else:
         response = await ctx.send(f"You just sent {message}!")
         moai = '\U0001F5FF'
+        money = '\U0001F4B8'
+        brain = '\U0001F9E0'
         await response.add_reaction(moai)
-        await response.add_reaction('\U0001F911')
+        await response.add_reaction(money)
+        await response.add_reaction(brain)
