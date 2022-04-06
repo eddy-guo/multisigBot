@@ -22,3 +22,6 @@ async def announcement(ctx, message):
         await response.add_reaction(brain)
         response = await response.channel.fetch_message(response.id)
         print(response.reactions)
+        # get message by id, then check reactions
+        temp = await ctx.fetch_message(961219056185274408)
+        print(temp.reactions)
