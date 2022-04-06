@@ -1,6 +1,7 @@
 import os, discord, pdb, asyncio
 from dotenv import load_dotenv
 from discord.ext import commands
+from asyncio import sleep
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -19,3 +20,5 @@ async def announcement(ctx, message):
         await response.add_reaction(moai)
         await response.add_reaction(money)
         await response.add_reaction(brain)
+        response = await response.channel.fetch_message(response.id)
+        print(response.reactions)
