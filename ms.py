@@ -30,11 +30,16 @@ async def on_message(message):
     role = discord.utils.get(ctx.guild.roles, name="testmod")
 
     if message.channel.id == 955726679207198741:
+        if message.content == "!announce" and user_messages[message.author.name] == "!announce":
+            user_messages[message.author.name] = "filler"
+            await announce.announcement(ctx, message.content)
+            print(user_messages)
+            return
         if message.content == "!announce":
-            if role in message.author.roles:
-                await ctx.send(f"What would you like to announce, <@" + str(message.author.id) + '>?')
-            else:
-                await ctx.send("**Sorry, you do not have permission to do that.**")
+                if role in message.author.roles:
+                    await ctx.send(f"What would you like to announce, <@" + str(message.author.id) + '>?')
+                else:
+                    await ctx.send("**Sorry, you do not have permission to do that.**")
 
     if user_messages[message.author.name] == "!announce":
         await announce.announcement(ctx, message.content)

@@ -9,4 +9,7 @@ bot = commands.Bot(command_prefix='!')
 
 @bot.command()
 async def announcement(ctx, message):
-    await ctx.send(f"You just sent {message}!")
+    if message == "!announce":
+        await ctx.send(f"You can only announce one message at a time. Please try again.")
+    else:
+        await ctx.send(f"You just sent {message}!")
