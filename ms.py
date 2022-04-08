@@ -31,7 +31,7 @@ async def on_message(message):
     ctx = await bot.get_context(message)
     role = discord.utils.get(ctx.guild.roles, name="testmod")
 
-    if message.channel.id == MOD:
+    if message.channel.id == int(MOD):
         if message.content == "!announce" and user_messages[message.author.name] == "!announce":
             user_messages[message.author.name] = "filler"
             await announce.announcement(ctx, message.content)
@@ -44,14 +44,14 @@ async def on_message(message):
 
     if user_messages[message.author.name] == "!announce":
         await announce.announcement(ctx, message.content)
-        channel = bot.get_channel(MOD)
+        channel = bot.get_channel(int(MOD))
         list = await channel.history(limit=1).flatten()
         if list[0].content == "**Announcement has been approved by moderators and will be sent to the announcements text channel.**":
-            channel = bot.get_channel(ANNOUNCE)
+            channel = bot.get_channel(int(ANNOUNCE))
             await channel.send(message.content)
             await ctx.send("**Announcement was successfully sent!**")
 
-    if role in message.author.roles and message.channel.id == MOD:
+    if role in message.author.roles and message.channel.id == int(MOD):
         user_messages[message.author.name] = message.content
 
 bot.run(TOKEN)
