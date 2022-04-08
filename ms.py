@@ -46,14 +46,5 @@ async def on_message(message):
 
     if role in message.author.roles and message.channel.id == 955726679207198741:
         user_messages[message.author.name] = message.content
-    print(user_messages)
-
-# @bot.event
-# async def on_reaction_add(reaction, user):
-#     moai = '\U0001F5FF'
-#     money = '\U0001F4B8'
-#     brain = '\U0001F9E0'
-#     if reaction.emoji == moai or reaction.emoji == money or reaction.emoji == brain:
-#         print(user)
 
 bot.run(TOKEN)
