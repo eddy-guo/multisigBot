@@ -42,7 +42,7 @@ async def on_message(message):
 
     if user_messages[message.author.name] == "!announce":
         await announce.announcement(ctx, message.content)
-        await announce.checkreaction()
+        await announce.checkreaction(ctx)
 
     if role in message.author.roles and message.channel.id == 955726679207198741:
         user_messages[message.author.name] = message.content
