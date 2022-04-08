@@ -2,12 +2,13 @@ import os, discord, pdb
 import announce
 from dotenv import load_dotenv
 from discord.ext import commands
-from announce import *
 
 load_dotenv()
 
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
+MOD = os.getenv('MOD_CHANNEL')
+ANNOUNCE = os.getenv('ANNOUNCEMENTS_CHANNEL')
 
 intents = discord.Intents.default()
 intents.members = True
@@ -30,7 +31,7 @@ async def on_message(message):
     ctx = await bot.get_context(message)
     role = discord.utils.get(ctx.guild.roles, name="testmod")
 
-    if message.channel.id == 955726679207198741:
+    if message.channel.id == MOD:
         if message.content == "!announce" and user_messages[message.author.name] == "!announce":
             user_messages[message.author.name] = "filler"
             await announce.announcement(ctx, message.content)
@@ -43,14 +44,14 @@ async def on_message(message):
 
     if user_messages[message.author.name] == "!announce":
         await announce.announcement(ctx, message.content)
-        channel = bot.get_channel(955726679207198741)
+        channel = bot.get_channel(MOD)
         list = await channel.history(limit=1).flatten()
         if list[0].content == "**Announcement has been approved by moderators and will be sent to the announcements text channel.**":
-            channel = bot.get_channel(961988047409414244)
+            channel = bot.get_channel(ANNOUNCE)
             await channel.send(message.content)
             await ctx.send("**Announcement was successfully sent!**")
 
-    if role in message.author.roles and message.channel.id == 955726679207198741:
+    if role in message.author.roles and message.channel.id == MOD:
         user_messages[message.author.name] = message.content
 
 bot.run(TOKEN)
