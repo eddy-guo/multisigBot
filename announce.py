@@ -1,4 +1,4 @@
-import os, discord, pdb, asyncio
+import os, discord, pdb, asyncio, emoji
 from dotenv import load_dotenv
 from discord.ext import commands
 from asyncio import sleep
@@ -14,14 +14,11 @@ async def announcement(ctx, message):
         await ctx.send(f"You can only announce one message at a time. Please try again.")
     else:
         response = await ctx.send(f"You just sent {message}!")
-        moai = '\U0001F5FF'
-        money = '\U0001F4B8'
-        brain = '\U0001F9E0'
-        await response.add_reaction(moai)
-        await response.add_reaction(money)
-        await response.add_reaction(brain)
+
+        good = emoji.emojize(':check_mark_button:')
+        bad = emoji.emojize(':cross_mark:')
+
+        await response.add_reaction(good)
+        await response.add_reaction(bad)
         response = await response.channel.fetch_message(response.id)
         print(response.reactions)
-        # get message by id, then check reactions
-        temp = await ctx.fetch_message(961219056185274408)
-        print(temp.reactions)
