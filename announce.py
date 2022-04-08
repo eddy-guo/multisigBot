@@ -25,7 +25,6 @@ async def announcement(ctx, message):
 
 @bot.command()
 async def checkreaction(ctx):
-    # wait 5 seconds, reassign variable to message id, check reactions again
     await asyncio.sleep(5)
     updated = await response.channel.fetch_message(response.id)
     if updated.reactions[0].count > updated.reactions[1].count:
