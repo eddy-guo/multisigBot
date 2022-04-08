@@ -22,9 +22,6 @@ async def announcement(ctx, message):
                                  f'\n\n{message}')
         await response.add_reaction(good)
         await response.add_reaction(bad)
-
-@bot.command()
-async def checkreaction(ctx):
     await asyncio.sleep(5)
     updated = await response.channel.fetch_message(response.id)
     if updated.reactions[0].count > updated.reactions[1].count:
