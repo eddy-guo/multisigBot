@@ -19,14 +19,13 @@ async def announcement(ctx, message):
         response = await ctx.send('__Please evaluate the following message and decide whether ' 
                                  f'it is appropriate as a server-wide announcement. '
                                  f'Vote by reacting on {good} and {bad} for **in favor** and **against** respectively.__'
-                                 f'\n\n{message}')
+                                 f'\n\n{message.content}')
         await response.add_reaction(good)
         await response.add_reaction(bad)
-
-@bot.command()
-async def checkreaction(ctx):
+        await asyncio.sleep(5)
     updated = await response.channel.fetch_message(response.id)
+    print(updated.id)
     if updated.reactions[0].count > updated.reactions[1].count:
-        await ctx.send("**Announcement has been approved by moderators and will be sent to the announcements text channel.**")
+        await ctx.send("**<@" + str(message.author.id) + ">'s announcement has been approved by moderators and will be sent to the announcements text channel.**")
     else:
-        await ctx.send('**Announcement has been rejected by moderators and will not be sent.**')
+        await ctx.send("**<@" + str(message.author.id) + ">'s announcement has been rejected by moderators and will not be sent.**")

@@ -43,12 +43,10 @@ async def on_message(message):
                     await ctx.send("**Sorry, you do not have permission to do that.**")
 
     if user_messages[message.author.name] == "!announce":
-        await announce.announcement(ctx, message.content)
-        await asyncio.sleep(5)
-        await announce.checkreaction(ctx)
+        await announce.announcement(ctx, message)
         channel = bot.get_channel(int(MOD))
         list = await channel.history(limit=1).flatten()
-        if list[0].content == "**Announcement has been approved by moderators and will be sent to the announcements text channel.**":
+        if list[0].content == "**<@" + str(message.author.id) + ">'s announcement has been approved by moderators and will be sent to the announcements text channel.**":
             channel = bot.get_channel(int(ANNOUNCE))
             await channel.send(message.content)
             await ctx.send("**Announcement was successfully sent!**")
