@@ -1,4 +1,4 @@
-import os, discord, pdb
+import os, discord, pdb, asyncio
 import announce
 from dotenv import load_dotenv
 from discord.ext import commands
@@ -44,6 +44,8 @@ async def on_message(message):
 
     if user_messages[message.author.name] == "!announce":
         await announce.announcement(ctx, message.content)
+        await asyncio.sleep(5)
+        await announce.checkreaction(ctx)
         channel = bot.get_channel(int(MOD))
         list = await channel.history(limit=1).flatten()
         if list[0].content == "**Announcement has been approved by moderators and will be sent to the announcements text channel.**":

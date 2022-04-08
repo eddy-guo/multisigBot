@@ -22,7 +22,9 @@ async def announcement(ctx, message):
                                  f'\n\n{message}')
         await response.add_reaction(good)
         await response.add_reaction(bad)
-    await asyncio.sleep(5)
+
+@bot.command()
+async def checkreaction(ctx):
     updated = await response.channel.fetch_message(response.id)
     if updated.reactions[0].count > updated.reactions[1].count:
         await ctx.send("**Announcement has been approved by moderators and will be sent to the announcements text channel.**")
