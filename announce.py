@@ -13,6 +13,7 @@ async def announcement(ctx, message):
     if message == "!announce":
         await ctx.send(f"You can only announce one message at a time. Please try again.")
     else:
+        global response
         response = await ctx.send(f"You just sent {message}!")
 
         good = emoji.emojize(':check_mark_button:')
@@ -21,4 +22,8 @@ async def announcement(ctx, message):
         await response.add_reaction(good)
         await response.add_reaction(bad)
         response = await response.channel.fetch_message(response.id)
-        print(response.reactions)
+
+@bot.command()
+async def checkreaction():
+    print(response.content)
+    print(response.reactions)
