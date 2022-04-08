@@ -10,7 +10,8 @@ bot = commands.Bot(command_prefix='!')
 @bot.command()
 async def announcement(ctx, message):
     if message == "!announce":
-        await ctx.send('You can only announce one message at a time, and only when the previous announcement is finished its evaluation.')
+        await ctx.send('Sorry, you can only announce one message at a time, '
+                      f'and only when the previous announcement is finished its evaluation.')
     else:
         global response
         response = await ctx.send(f"You just sent {message}!")
@@ -26,6 +27,6 @@ async def checkreaction(ctx):
     await asyncio.sleep(5)
     updated = await response.channel.fetch_message(response.id)
     if updated.reactions[0].count > updated.reactions[1].count:
-        await ctx.send("Announcement is good to send!")
+        await ctx.send("Announcement is good to send! (evaluation complete)")
     else:
-        await ctx.send('Announcement is not approved.')
+        await ctx.send('Announcement is not approved. (evaluation complete)')
